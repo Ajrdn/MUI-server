@@ -110,4 +110,14 @@ export class TaskDataListController {
     taskDataList.push(taskData);
     return taskDataList.filter((taskData) => taskData.workDate === date);
   }
+
+  @Post(':date')
+  addTaskDataByList(
+    @Param('date') date: string,
+    @Body() newTaskDataList: TaskData[],
+  ) {
+    console.log(newTaskDataList);
+    taskDataList.concat(newTaskDataList);
+    return taskDataList.filter((taskData) => taskData.workDate === date);
+  }
 }
