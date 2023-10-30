@@ -1,4 +1,4 @@
-import { Controller, Body, Param, Get, Post } from '@nestjs/common';
+import { Controller, Body, Param, Get, Post, Put } from '@nestjs/common';
 
 interface TaskData {
   workDate: string;
@@ -106,18 +106,19 @@ export class TaskDataListController {
 
   @Post(':date')
   addTaskData(@Param('date') date: string, @Body() taskData: TaskData) {
-    console.log(taskData);
     taskDataList.push(taskData);
     return taskDataList.filter((taskData) => taskData.workDate === date);
   }
 
-  @Post(':date')
+  @Put(':date')
   addTaskDataByList(
     @Param('date') date: string,
     @Body() newTaskDataList: TaskData[],
   ) {
+    taskDataList.push(...newTaskDataList);
     console.log(newTaskDataList);
-    taskDataList.concat(newTaskDataList);
+    console.log('------------------------');
+    console.log(taskDataList);
     return taskDataList.filter((taskData) => taskData.workDate === date);
   }
 }
