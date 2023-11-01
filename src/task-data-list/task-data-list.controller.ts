@@ -1,5 +1,5 @@
 import { Controller, Body, Param, Get, Post, Put } from '@nestjs/common';
-import dayjs from 'dayjs';
+import * as dayjs from 'dayjs';
 
 interface TaskData {
   workDate: string;
