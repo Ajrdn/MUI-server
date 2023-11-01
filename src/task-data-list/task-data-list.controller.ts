@@ -38,7 +38,7 @@ const taskDataList: TaskData[] = [
     weight: '1735',
   },
   {
-    workDate: today.add(1, 'day').format('YYYY-MM-DD'),
+    workDate: today.subtract(1, 'day').format('YYYY-MM-DD'),
     lotNo: '231017-1k-04',
     variety: 'C7060P2',
     standard: '180x420',
@@ -46,7 +46,7 @@ const taskDataList: TaskData[] = [
     weight: '1735',
   },
   {
-    workDate: today.add(1, 'day').format('YYYY-MM-DD'),
+    workDate: today.subtract(1, 'day').format('YYYY-MM-DD'),
     lotNo: '231017-1k-05',
     variety: 'C7060P3',
     standard: '280x320',
@@ -54,7 +54,7 @@ const taskDataList: TaskData[] = [
     weight: '1735',
   },
   {
-    workDate: today.add(1, 'day').format('YYYY-MM-DD'),
+    workDate: today.subtract(1, 'day').format('YYYY-MM-DD'),
     lotNo: '231017-1k-06',
     variety: 'C7060P3',
     standard: '280x320',
@@ -62,7 +62,7 @@ const taskDataList: TaskData[] = [
     weight: '435',
   },
   {
-    workDate: today.add(2, 'day').format('YYYY-MM-DD'),
+    workDate: today.subtract(2, 'day').format('YYYY-MM-DD'),
     lotNo: '231017-1k-07',
     variety: 'C7060P4',
     standard: '280x320',
@@ -70,7 +70,7 @@ const taskDataList: TaskData[] = [
     weight: '435',
   },
   {
-    workDate: today.add(2, 'day').format('YYYY-MM-DD'),
+    workDate: today.subtract(2, 'day').format('YYYY-MM-DD'),
     lotNo: '231017-1k-08',
     variety: 'C7060P4',
     standard: '280x320',
@@ -78,7 +78,7 @@ const taskDataList: TaskData[] = [
     weight: '435',
   },
   {
-    workDate: today.add(2, 'day').format('YYYY-MM-DD'),
+    workDate: today.subtract(2, 'day').format('YYYY-MM-DD'),
     lotNo: '231017-1k-09',
     variety: 'C7060P5',
     standard: '380x360',
@@ -86,7 +86,7 @@ const taskDataList: TaskData[] = [
     weight: '435',
   },
   {
-    workDate: today.add(3, 'day').format('YYYY-MM-DD'),
+    workDate: today.subtract(3, 'day').format('YYYY-MM-DD'),
     lotNo: '231017-1k-10',
     variety: 'C7060P5',
     standard: '380x360',
