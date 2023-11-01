@@ -1,4 +1,5 @@
 import { Controller, Body, Param, Get, Post, Put } from '@nestjs/common';
+import dayjs from 'dayjs';
 
 interface TaskData {
   workDate: string;
@@ -9,9 +10,11 @@ interface TaskData {
   weight: string;
 }
 
+const today = dayjs();
+
 const taskDataList: TaskData[] = [
   {
-    workDate: '2023-10-24',
+    workDate: today.format('YYYY-MM-DD'),
     lotNo: '231017-1k-01',
     variety: 'C7060P1',
     standard: '180x420',
@@ -19,7 +22,7 @@ const taskDataList: TaskData[] = [
     weight: '1735',
   },
   {
-    workDate: '2023-10-24',
+    workDate: today.format('YYYY-MM-DD'),
     lotNo: '231017-1k-02',
     variety: 'C7060P1',
     standard: '180x420',
@@ -27,7 +30,7 @@ const taskDataList: TaskData[] = [
     weight: '1735',
   },
   {
-    workDate: '2023-10-24',
+    workDate: today.format('YYYY-MM-DD'),
     lotNo: '231017-1k-03',
     variety: 'C7060P2',
     standard: '180x420',
@@ -35,7 +38,7 @@ const taskDataList: TaskData[] = [
     weight: '1735',
   },
   {
-    workDate: '2023-10-25',
+    workDate: today.add(1, 'day').format('YYYY-MM-DD'),
     lotNo: '231017-1k-04',
     variety: 'C7060P2',
     standard: '180x420',
@@ -43,7 +46,7 @@ const taskDataList: TaskData[] = [
     weight: '1735',
   },
   {
-    workDate: '2023-10-25',
+    workDate: today.add(1, 'day').format('YYYY-MM-DD'),
     lotNo: '231017-1k-05',
     variety: 'C7060P3',
     standard: '280x320',
@@ -51,7 +54,7 @@ const taskDataList: TaskData[] = [
     weight: '1735',
   },
   {
-    workDate: '2023-10-25',
+    workDate: today.add(1, 'day').format('YYYY-MM-DD'),
     lotNo: '231017-1k-06',
     variety: 'C7060P3',
     standard: '280x320',
@@ -59,7 +62,7 @@ const taskDataList: TaskData[] = [
     weight: '435',
   },
   {
-    workDate: '2023-10-26',
+    workDate: today.add(2, 'day').format('YYYY-MM-DD'),
     lotNo: '231017-1k-07',
     variety: 'C7060P4',
     standard: '280x320',
@@ -67,7 +70,7 @@ const taskDataList: TaskData[] = [
     weight: '435',
   },
   {
-    workDate: '2023-10-26',
+    workDate: today.add(2, 'day').format('YYYY-MM-DD'),
     lotNo: '231017-1k-08',
     variety: 'C7060P4',
     standard: '280x320',
@@ -75,7 +78,7 @@ const taskDataList: TaskData[] = [
     weight: '435',
   },
   {
-    workDate: '2023-10-26',
+    workDate: today.add(2, 'day').format('YYYY-MM-DD'),
     lotNo: '231017-1k-09',
     variety: 'C7060P5',
     standard: '380x360',
@@ -83,7 +86,7 @@ const taskDataList: TaskData[] = [
     weight: '435',
   },
   {
-    workDate: '2023-10-27',
+    workDate: today.add(3, 'day').format('YYYY-MM-DD'),
     lotNo: '231017-1k-10',
     variety: 'C7060P5',
     standard: '380x360',
