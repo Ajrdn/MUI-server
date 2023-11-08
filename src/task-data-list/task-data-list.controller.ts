@@ -1,7 +1,16 @@
-import { Controller, Body, Param, Get, Post, Put } from '@nestjs/common';
+import {
+  Controller,
+  Body,
+  Param,
+  Get,
+  Post,
+  Put,
+  Delete,
+} from '@nestjs/common';
 import * as dayjs from 'dayjs';
 
 interface TaskData {
+  id?: string;
   workDate: string;
   lotNo: string;
   variety: string;
@@ -12,8 +21,9 @@ interface TaskData {
 
 const today = dayjs();
 
-const taskDataList: TaskData[] = [
+let taskDataList: TaskData[] = [
   {
+    id: '0001',
     workDate: today.format('YYYY-MM-DD'),
     lotNo: '231017-1k-01',
     variety: 'C7060P1',
@@ -22,6 +32,7 @@ const taskDataList: TaskData[] = [
     weight: '1735',
   },
   {
+    id: '0002',
     workDate: today.format('YYYY-MM-DD'),
     lotNo: '231017-1k-02',
     variety: 'C7060P1',
@@ -30,6 +41,7 @@ const taskDataList: TaskData[] = [
     weight: '1735',
   },
   {
+    id: '0003',
     workDate: today.format('YYYY-MM-DD'),
     lotNo: '231017-1k-03',
     variety: 'C7060P2',
@@ -38,6 +50,7 @@ const taskDataList: TaskData[] = [
     weight: '1735',
   },
   {
+    id: '0004',
     workDate: today.format('YYYY-MM-DD'),
     lotNo: '231017-1k-01',
     variety: 'C7060P1',
@@ -46,6 +59,7 @@ const taskDataList: TaskData[] = [
     weight: '1735',
   },
   {
+    id: '0005',
     workDate: today.format('YYYY-MM-DD'),
     lotNo: '231017-1k-02',
     variety: 'C7060P1',
@@ -54,6 +68,7 @@ const taskDataList: TaskData[] = [
     weight: '1338',
   },
   {
+    id: '0006',
     workDate: today.format('YYYY-MM-DD'),
     lotNo: '231017-1k-03',
     variety: 'C7060P2',
@@ -62,6 +77,7 @@ const taskDataList: TaskData[] = [
     weight: '1735',
   },
   {
+    id: '0007',
     workDate: today.subtract(1, 'day').format('YYYY-MM-DD'),
     lotNo: '231017-1k-04',
     variety: 'C7060P2',
@@ -70,6 +86,7 @@ const taskDataList: TaskData[] = [
     weight: '1735',
   },
   {
+    id: '0008',
     workDate: today.subtract(1, 'day').format('YYYY-MM-DD'),
     lotNo: '231017-1k-05',
     variety: 'C7060P3',
@@ -78,6 +95,7 @@ const taskDataList: TaskData[] = [
     weight: '1735',
   },
   {
+    id: '0009',
     workDate: today.subtract(1, 'day').format('YYYY-MM-DD'),
     lotNo: '231017-1k-06',
     variety: 'C7060P3',
@@ -86,6 +104,7 @@ const taskDataList: TaskData[] = [
     weight: '435',
   },
   {
+    id: '0010',
     workDate: today.subtract(2, 'day').format('YYYY-MM-DD'),
     lotNo: '231017-1k-07',
     variety: 'C7060P4',
@@ -94,6 +113,7 @@ const taskDataList: TaskData[] = [
     weight: '435',
   },
   {
+    id: '0011',
     workDate: today.subtract(2, 'day').format('YYYY-MM-DD'),
     lotNo: '231017-1k-08',
     variety: 'C7060P4',
@@ -102,6 +122,7 @@ const taskDataList: TaskData[] = [
     weight: '435',
   },
   {
+    id: '0012',
     workDate: today.subtract(2, 'day').format('YYYY-MM-DD'),
     lotNo: '231017-1k-09',
     variety: 'C7060P5',
@@ -110,6 +131,7 @@ const taskDataList: TaskData[] = [
     weight: '435',
   },
   {
+    id: '0013',
     workDate: today.subtract(3, 'day').format('YYYY-MM-DD'),
     lotNo: '231017-1k-10',
     variety: 'C7060P5',
@@ -133,7 +155,17 @@ export class TaskDataListController {
 
   @Post(':date')
   addTaskData(@Param('date') date: string, @Body() taskData: TaskData) {
-    taskDataList.push(taskData);
+    const id: string = taskDataList.reduce(
+      (maxId: string, taskData: TaskData) => {
+        if (parseInt(taskData.id) > parseInt(maxId)) return taskData.id;
+        return maxId;
+      },
+      '0',
+    );
+    taskDataList.push({
+      ...taskData,
+      id: (parseInt(id) + 1).toString().padStart(4, '0'),
+    });
     return taskDataList.filter((taskData) => taskData.workDate === date);
   }
 
@@ -142,10 +174,30 @@ export class TaskDataListController {
     @Param('date') date: string,
     @Body() newTaskDataList: TaskData[],
   ) {
-    taskDataList.push(...newTaskDataList);
-    console.log(newTaskDataList);
-    console.log('------------------------');
+    const id: string = taskDataList.reduce(
+      (maxId: string, taskData: TaskData) => {
+        if (parseInt(taskData.id) > parseInt(maxId)) return taskData.id;
+        return maxId;
+      },
+      '0',
+    );
+    const newTaskDataListWithId = newTaskDataList.map((taskData, index) => ({
+      ...taskData,
+      id: (parseInt(id) + index + 1).toString().padStart(4, '0'),
+    }));
+    taskDataList.push(...newTaskDataListWithId);
     console.log(taskDataList);
+    return taskDataList.filter((taskData) => taskData.workDate === date);
+  }
+
+  @Delete('/:date')
+  deleteTaskData(
+    @Param('date') date: string,
+    @Body() deleteTaskData: TaskData,
+  ) {
+    taskDataList = taskDataList.filter(
+      (taskData) => taskData.id !== deleteTaskData.id,
+    );
     return taskDataList.filter((taskData) => taskData.workDate === date);
   }
 }
