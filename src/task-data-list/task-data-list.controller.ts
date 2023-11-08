@@ -6,6 +6,7 @@ import {
   Post,
   Put,
   Delete,
+  Patch,
 } from '@nestjs/common';
 import * as dayjs from 'dayjs';
 
@@ -169,6 +170,18 @@ export class TaskDataListController {
     return taskDataList.filter((taskData) => taskData.workDate === date);
   }
 
+  @Patch(':date')
+  updateTaskData(
+    @Param('date') date: string,
+    @Body() taskDataClient: TaskData,
+  ) {
+    taskDataList = taskDataList.map((taskData) => {
+      if (taskData.id === taskDataClient.id) return taskDataClient;
+      return taskData;
+    });
+    return taskDataList.filter((taskData) => taskData.workDate === date);
+  }
+
   @Put(':date')
   addTaskDataByList(
     @Param('date') date: string,
@@ -186,7 +199,6 @@ export class TaskDataListController {
       id: (parseInt(id) + index + 1).toString().padStart(4, '0'),
     }));
     taskDataList.push(...newTaskDataListWithId);
-    console.log(taskDataList);
     return taskDataList.filter((taskData) => taskData.workDate === date);
   }
 
