@@ -170,7 +170,7 @@ export class TaskDataListController {
     return taskDataList.filter((taskData) => taskData.workDate === date);
   }
 
-  @Patch(':date')
+  @Post('/update/:date')
   updateTaskData(
     @Param('date') date: string,
     @Body() taskDataClient: TaskData,
