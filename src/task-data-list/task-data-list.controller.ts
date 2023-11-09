@@ -6,7 +6,6 @@ import {
   Post,
   Put,
   Delete,
-  Patch,
 } from '@nestjs/common';
 import * as dayjs from 'dayjs';
 
